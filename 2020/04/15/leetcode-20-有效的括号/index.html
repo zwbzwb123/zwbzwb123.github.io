@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Nacos作为配置中心 | ZWBLOG</title>
+  <title>leetcode---20.有效的括号 | ZWBLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简要概述如何通过 Nacos 作为配置中心">
+  <meta name="description" content="给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nacos作为配置中心">
-<meta property="og:url" content="http://yoursite.com/2020/04/13/Nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/index.html">
+<meta property="og:title" content="leetcode---20.有效的括号">
+<meta property="og:url" content="http://yoursite.com/2020/04/15/leetcode-20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/index.html">
 <meta property="og:site_name" content="ZWBLOG">
-<meta property="og:description" content="简要概述如何通过 Nacos 作为配置中心">
+<meta property="og:description" content="给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://q89emimpd.bkt.clouddn.com/nacos-config.png">
-<meta property="article:published_time" content="2020-04-13T09:41:29.000Z">
-<meta property="article:modified_time" content="2020-04-13T10:33:19.985Z">
+<meta property="article:published_time" content="2020-04-15T10:56:37.000Z">
+<meta property="article:modified_time" content="2020-04-16T05:53:37.398Z">
 <meta property="article:author" content="ZWB">
-<meta property="article:tag" content="Spring Cloud">
+<meta property="article:tag" content="数据结构与算法,leetcode">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://q89emimpd.bkt.clouddn.com/nacos-config.png">
   
     <link rel="alternative" href="/atom.xml" title="ZWBLOG" type="application/atom+xml">
   
@@ -153,44 +151,34 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Nacos作为配置中心" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-leetcode-20-有效的括号" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Nacos作为配置中心
+      leetcode---20.有效的括号
     </h1>
   
 
         
-        <a href="/2020/04/13/Nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/" class="archive-article-date">
-  	<time datetime="2020-04-13T09:41:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-13</time>
+        <a href="/2020/04/15/leetcode-20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" class="archive-article-date">
+  	<time datetime="2020-04-15T10:56:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>简要概述如何通过 Nacos 作为配置中心</p>
+        <p>给定一个只包括 ‘(‘，’)’，’{‘，’}’，’[‘，’]’ 的字符串，判断字符串是否有效。</p>
 <a id="more"></a>
 
-<p>启动 Nacosm， <a href="http://localhost:8848" target="_blank" rel="noopener">http://localhost:8848</a> 账号密码默认为 nacos</p>
-<h4 id="添加-Maven-依赖"><a href="#添加-Maven-依赖" class="headerlink" title="添加 Maven 依赖"></a>添加 Maven 依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>有效字符串需满足：</p>
+<p>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。<br>注意空字符串可被认为是有效字符串。</p>
+<p>解题思路：转成字符数组，按顺序判断，如果是左括号，入栈，否则，弹栈，判断是否与该括号匹配，不匹配，则返回false，匹配则继续。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (s.isEmpty())&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       HashMap&lt;Character,Character&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">       Stack&lt;Character&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">       map.put(<span class="string">'&#125;'</span>,<span class="string">'&#123;'</span>);</span><br><span class="line">       map.put(<span class="string">')'</span>,<span class="string">'('</span>);</span><br><span class="line">       map.put(<span class="string">']'</span>,<span class="string">'['</span>);</span><br><span class="line">       <span class="keyword">for</span> (Character c : s.toCharArray())&#123;</span><br><span class="line">           <span class="keyword">if</span> (map.containsKey(c))&#123;</span><br><span class="line">               <span class="keyword">if</span> (stack.isEmpty())&#123;</span><br><span class="line">                   <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               Character pop = stack.pop();</span><br><span class="line">               <span class="keyword">if</span> (!pop.equals(map.get(c)))&#123;</span><br><span class="line">                   <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">               stack.push(c);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> stack.isEmpty();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<h4 id="创建配置文件-bootstrap-properties-配置-Nacos地址，应用名与配置信息的DataID相同"><a href="#创建配置文件-bootstrap-properties-配置-Nacos地址，应用名与配置信息的DataID相同" class="headerlink" title="创建配置文件 bootstrap.properties 配置 Nacos地址，应用名与配置信息的DataID相同"></a>创建配置文件 bootstrap.properties 配置 Nacos地址，应用名与配置信息的DataID相同</h4><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.application.name</span>=<span class="string">nacos-config</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.discovery.server-addr</span>=<span class="string">127.0.0.1:8848</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="在-Nacos控制台添加配置"><a href="#在-Nacos控制台添加配置" class="headerlink" title="在 Nacos控制台添加配置"></a>在 Nacos控制台添加配置</h4><p><img src="http://q89emimpd.bkt.clouddn.com/nacos-config.png" alt=""></p>
-<h4 id="编写启动类-与-测试接口"><a href="#编写启动类-与-测试接口" class="headerlink" title="编写启动类 与 测试接口"></a>编写启动类 与 测试接口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zwb.serviceconsumer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.client.ServiceInstance;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.client.discovery.EnableDiscoveryClient;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.client.loadbalancer.LoadBalancerClient;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ConfigurableApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.env.Environment;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.client.RestTemplate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceConsumerApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ConfigurableApplicationContext context;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span>  </span>&#123;</span><br><span class="line">        SpringApplication.run(ServiceConsumerApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RestController</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerController</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Value</span>(<span class="string">"$&#123;user.name&#125;"</span>)</span><br><span class="line">        <span class="keyword">public</span> String name;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Autowired</span></span><br><span class="line">        Environment environment;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@GetMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(environment.getProperty(<span class="string">"user.name"</span>));</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"hehe"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>启动应用，并访问 <a href="http://localhost:6060/hello" target="_blank" rel="noopener">http://localhost:6060/hello</a> 可以看到控制台打印了 zwb ，在 Nacos 控制台中修改，相应的 Environment 中也会修改</p>
 
       
 
@@ -230,7 +218,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Spring Cloud</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">数据结构与算法,leetcode</a>
         		</li>
       		
 		</ul>
@@ -286,7 +274,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/13/Nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/15/leetcode-20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -300,18 +288,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/14/RabbitMQ%E5%88%9D%E4%BD%93%E9%AA%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/16/leetcode-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          RabbitMQ 初体验
+          leetcode---71.简化路径
         
       </div>
     </a>
   
   
-    <a href="/2020/04/13/Sentinel%E4%BD%BF%E7%94%A8Nacos%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%8A%A8%E6%80%81%E5%AD%98%E5%82%A8%E8%A7%84%E5%88%99/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Sentinel使用Nacos配置中心动态存储规则</div>
+    <a href="/2020/04/14/RabbitMQ%E5%88%9D%E4%BD%93%E9%AA%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RabbitMQ 初体验</div>
       <i class="icon-circle-right"></i>
     </a>
   
