@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>leetcode---71.简化路径 | ZWBLOG</title>
+  <title>leetcode---456.132模式 | ZWBLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="以 Unix 风格给出一个文件的绝对路径，你需要简化它。或者换句话说，将其转换为规范路径。">
+  <meta name="description" content="给定一个整数序列：a1, a2, …, an，一个132模式的子序列 ai, aj, ak 被定义为：当 i &lt; j &lt; k 时，ai &lt; ak &lt; aj。设计一个算法，当给定有 n 个数字的序列时，验证这个序列中是否含有132模式的子序列。 注意：n 的值小于15000。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode---71.简化路径">
-<meta property="og:url" content="http://yoursite.com/2020/04/16/leetcode-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/index.html">
+<meta property="og:title" content="leetcode---456.132模式">
+<meta property="og:url" content="http://yoursite.com/2020/05/04/leetcode-456-132%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="ZWBLOG">
-<meta property="og:description" content="以 Unix 风格给出一个文件的绝对路径，你需要简化它。或者换句话说，将其转换为规范路径。">
+<meta property="og:description" content="给定一个整数序列：a1, a2, …, an，一个132模式的子序列 ai, aj, ak 被定义为：当 i &lt; j &lt; k 时，ai &lt; ak &lt; aj。设计一个算法，当给定有 n 个数字的序列时，验证这个序列中是否含有132模式的子序列。 注意：n 的值小于15000。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-16T05:17:25.000Z">
-<meta property="article:modified_time" content="2020-04-21T06:09:42.123Z">
+<meta property="article:published_time" content="2020-05-04T06:37:26.000Z">
+<meta property="article:modified_time" content="2020-05-04T07:38:28.971Z">
 <meta property="article:author" content="ZWB">
 <meta property="article:tag" content="数据结构与算法">
 <meta property="article:tag" content="leetcode">
@@ -152,33 +152,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-leetcode-71-简化路径" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-leetcode-456-132模式" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      leetcode---71.简化路径
+      leetcode---456.132模式
     </h1>
   
 
         
-        <a href="/2020/04/16/leetcode-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/" class="archive-article-date">
-  	<time datetime="2020-04-16T05:17:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
+        <a href="/2020/05/04/leetcode-456-132%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+  	<time datetime="2020-05-04T06:37:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>以 Unix 风格给出一个文件的绝对路径，你需要简化它。或者换句话说，将其转换为规范路径。</p>
+        <p>给定一个整数序列：a1, a2, …, an，一个132模式的子序列 ai, aj, ak 被定义为：当 i &lt; j &lt; k 时，ai &lt; ak &lt; aj。设计一个算法，当给定有 n 个数字的序列时，验证这个序列中是否含有132模式的子序列。</p>
+<p>注意：n 的值小于15000。</p>
 <a id="more"></a>
 
-<p>在 Unix 风格的文件系统中，一个点（.）表示当前目录本身；此外，两个点 （..） 表示将目录切换到上一级（指向父目录）；两者都可以是复杂相对路径的组成部分。更多信息请参阅：Linux / Unix中的绝对路径 vs 相对路径</p>
-<p>请注意，返回的规范路径必须始终以斜杠 / 开头，并且两个目录名之间必须只有一个斜杠 /。最后一个目录名（如果存在）不能以 / 结尾。此外，规范路径必须是表示绝对路径的最短字符串。</p>
-<p>解题思路：如果是  .  则不进行操作, 如果是 ..  则弹栈 ,否则就入栈,最后倒着拼接字符串</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">simplifyPath</span><span class="params">(String path)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (path.isEmpty())&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"/"</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       Stack&lt;String&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">       String[] paths = path.split(<span class="string">"/"</span>); </span><br><span class="line">       <span class="keyword">for</span> (String p:paths)&#123;</span><br><span class="line">           <span class="keyword">if</span> (p.equals(<span class="string">".."</span>) &amp;&amp; !stack.isEmpty())&#123;</span><br><span class="line">                   stack.pop();</span><br><span class="line">           &#125;<span class="keyword">else</span> <span class="keyword">if</span> (!p.equals(<span class="string">"."</span>) &amp;&amp; !p.equals(<span class="string">""</span>)&amp;&amp;!p.equals(<span class="string">".."</span>))&#123;</span><br><span class="line">               stack.push(p);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (stack.isEmpty())&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"/"</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       StringBuffer res = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stack.size(); i++) &#123;</span><br><span class="line">           res.append(<span class="string">"/"</span> + stack.get(i));</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> res.toString();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>思路：</p>
+<p>对于min数组来说，min[n] 的元素是 0 - n 处最小的。从后往前遍历时，若当前元素 nums[n]大于 min[n] ，则说明 min[n] 所代表的元素值在 nums[n] 左侧， 只需要从栈中找到小于 nums[n] 的即可，若小于 等于min[n]的都弹出。 </p>
+<p>官方题解：<a href="https://leetcode-cn.com/problems/132-pattern/solution/132mo-shi-by-leetcode-2/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/132-pattern/solution/132mo-shi-by-leetcode-2/</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">find132pattern</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums.length&lt;<span class="number">3</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    LinkedList&lt;Integer&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span>[] min = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">    min[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;nums.length;i++)&#123;</span><br><span class="line">        min[i] = Math.min(min[i-<span class="number">1</span>],nums[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = nums.length-<span class="number">1</span>;j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[j]&gt;min[j])&#123;</span><br><span class="line">            <span class="keyword">while</span> (!stack.isEmpty() &amp;&amp; stack.peek()&lt;=min[j])&#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!stack.isEmpty() &amp;&amp; stack.peek() &lt; nums[j])</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            stack.push(nums[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -277,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/16/leetcode-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/04/leetcode-456-132%E6%A8%A1%E5%BC%8F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,18 +294,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/16/leetcode-94-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          leetcode---94.二叉树的中序遍历
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/15/leetcode-20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">leetcode---20.有效的括号</div>
+    <a href="/2020/04/30/Spring-Boot-%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%BA%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring Boot 动态切换数据源</div>
       <i class="icon-circle-right"></i>
     </a>
   

@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>leetcode---71.简化路径 | ZWBLOG</title>
+  <title>MySQL主从复制 | ZWBLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="以 Unix 风格给出一个文件的绝对路径，你需要简化它。或者换句话说，将其转换为规范路径。">
+  <meta name="description" content="概述：主从复制是指将主数据库的DDL和DML操作通过二进制日志(bin log)传到从库服务器上，然后从库对这些日志重新执行，从而使得从库和主库的数据保持同步。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode---71.简化路径">
-<meta property="og:url" content="http://yoursite.com/2020/04/16/leetcode-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/index.html">
+<meta property="og:title" content="MySQL主从复制">
+<meta property="og:url" content="http://yoursite.com/2020/04/30/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/index.html">
 <meta property="og:site_name" content="ZWBLOG">
-<meta property="og:description" content="以 Unix 风格给出一个文件的绝对路径，你需要简化它。或者换句话说，将其转换为规范路径。">
+<meta property="og:description" content="概述：主从复制是指将主数据库的DDL和DML操作通过二进制日志(bin log)传到从库服务器上，然后从库对这些日志重新执行，从而使得从库和主库的数据保持同步。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-16T05:17:25.000Z">
-<meta property="article:modified_time" content="2020-04-21T06:09:42.123Z">
+<meta property="article:published_time" content="2020-04-30T07:21:07.000Z">
+<meta property="article:modified_time" content="2020-05-01T05:35:05.425Z">
 <meta property="article:author" content="ZWB">
-<meta property="article:tag" content="数据结构与算法">
-<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ZWBLOG" type="application/atom+xml">
@@ -152,33 +151,90 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-leetcode-71-简化路径" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MySQL主从复制" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      leetcode---71.简化路径
+      MySQL主从复制
     </h1>
   
 
         
-        <a href="/2020/04/16/leetcode-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/" class="archive-article-date">
-  	<time datetime="2020-04-16T05:17:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
+        <a href="/2020/04/30/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" class="archive-article-date">
+  	<time datetime="2020-04-30T07:21:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>以 Unix 风格给出一个文件的绝对路径，你需要简化它。或者换句话说，将其转换为规范路径。</p>
+        <p>概述：主从复制是指将主数据库的DDL和DML操作通过二进制日志(bin log)传到从库服务器上，然后从库对这些日志重新执行，从而使得从库和主库的数据保持同步。</p>
 <a id="more"></a>
 
-<p>在 Unix 风格的文件系统中，一个点（.）表示当前目录本身；此外，两个点 （..） 表示将目录切换到上一级（指向父目录）；两者都可以是复杂相对路径的组成部分。更多信息请参阅：Linux / Unix中的绝对路径 vs 相对路径</p>
-<p>请注意，返回的规范路径必须始终以斜杠 / 开头，并且两个目录名之间必须只有一个斜杠 /。最后一个目录名（如果存在）不能以 / 结尾。此外，规范路径必须是表示绝对路径的最短字符串。</p>
-<p>解题思路：如果是  .  则不进行操作, 如果是 ..  则弹栈 ,否则就入栈,最后倒着拼接字符串</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">simplifyPath</span><span class="params">(String path)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (path.isEmpty())&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"/"</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       Stack&lt;String&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">       String[] paths = path.split(<span class="string">"/"</span>); </span><br><span class="line">       <span class="keyword">for</span> (String p:paths)&#123;</span><br><span class="line">           <span class="keyword">if</span> (p.equals(<span class="string">".."</span>) &amp;&amp; !stack.isEmpty())&#123;</span><br><span class="line">                   stack.pop();</span><br><span class="line">           &#125;<span class="keyword">else</span> <span class="keyword">if</span> (!p.equals(<span class="string">"."</span>) &amp;&amp; !p.equals(<span class="string">""</span>)&amp;&amp;!p.equals(<span class="string">".."</span>))&#123;</span><br><span class="line">               stack.push(p);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (stack.isEmpty())&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"/"</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       StringBuffer res = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stack.size(); i++) &#123;</span><br><span class="line">           res.append(<span class="string">"/"</span> + stack.get(i));</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> res.toString();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>主从复制分成三步</p>
+<ul>
+<li>主库在事务提交时，会把数据变更作为事件记录在binlog中</li>
+<li>主库推送binlog中的日志事件到从库的中继日志 Relay Log</li>
+<li>从库重做中继日志中的事件，将改变反应它自己的数据。</li>
+</ul>
+<p>主从复制的优点</p>
+<ul>
+<li>主库出现问题，可以快速切换到从库提供服务</li>
+<li>可以实现读写分离，降低主库的访问压力</li>
+<li>可以在从库中执行备份，以避免备份期间影响主库的服务</li>
+</ul>
+<p><strong>搭建步骤</strong></p>
+<ol>
+<li><p>准备两台服务器</p>
+</li>
+<li><p>主节点配置文件部分如下</p>
+<ul>
+<li>server-id=1 mysql 服务id 保证整个集群环境唯一</li>
+<li>log-bin=”mysql-bin”  binlog存储路径和文件名</li>
+<li>read-only=0  1表示只读，0表示读写</li>
+<li>binlog-ignore-db=mysql 不需要同步的数据库</li>
+</ul>
+</li>
+<li><p>主库执行如下操作</p>
+<ul>
+<li>grant replication slave on *.* to ‘user’@’198.168.0.123’ identified by ‘111111’</li>
+<li>flush privileges  刷新</li>
+<li>master show status 查看信息</li>
+</ul>
+</li>
+<li><p>从节点配置如下</p>
+<ul>
+<li>添加：relay-log=relay-log</li>
+<li>添加：relay-log-index=relay-log.index</li>
+<li>添加：server-id=2</li>
+<li>添加：innodb_file_per_table=ON</li>
+<li>添加：skip_name_resolve=ON</li>
+</ul>
+</li>
+<li><p>从库执行如下操作</p>
+<ul>
+<li>change master to master_host= ‘192.168.0.111’,master_user=’root’,master_password=’111111’,master_log_file=’mysql-bin.000001’,master_log_pos=111;</li>
+<li>start slave</li>
+<li>show slave status\G</li>
+</ul>
+</li>
+</ol>
+<h5 id="关于-mysqldump"><a href="#关于-mysqldump" class="headerlink" title="关于 mysqldump"></a>关于 mysqldump</h5><p>mysqldump 客户端工具用来备份数据或在不同数据库之间进行数据迁移，备份的内容包括创建表，插入表的SQL语句</p>
+<p>语法：</p>
+<p>mysqldump -u 指定用户名 -p 指定密码 -h 指定ip或域名 -P 指定端口     db_name [tables 如果不写表名，则表示备份全部表] / -B db1 db2 db3 / -A</p>
+<p>-n 不包括数据库的创建语句</p>
+<p>-t 不包括数据表的创建语句</p>
+<p>-d 不包含数据</p>
+<p>–add-drop-database 在创建数据库语句之前加上 drop database</p>
+<p>–add-drop-table 同上</p>
+<p>例子：</p>
+<p>​    mysqldump -uroot -p111111 test tb_user &gt; user.sql  执行改命令，就会在当前文件夹下创建一个 user.sql 文件，内容大致如下。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)</span></span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="comment">-- Host: localhost    Database: shiro</span></span><br><span class="line"><span class="comment">-- ------------------------------------------------------</span></span><br><span class="line"><span class="comment">-- Server version	8.0.15</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */</span>;</span><br><span class="line"><span class="comment">/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */</span>;</span><br><span class="line"><span class="comment">/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */</span>;</span><br><span class="line"> <span class="keyword">SET</span> <span class="keyword">NAMES</span> utf8mb4 ;</span><br><span class="line"><span class="comment">/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */</span>;</span><br><span class="line"><span class="comment">/*!40103 SET TIME_ZONE='+00:00' */</span>;</span><br><span class="line"><span class="comment">/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */</span>;</span><br><span class="line"><span class="comment">/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */</span>;</span><br><span class="line"><span class="comment">/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */</span>;</span><br><span class="line"><span class="comment">/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="comment">-- Table structure for table `user`</span></span><br><span class="line"><span class="comment">--</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`user`</span>;</span><br><span class="line"><span class="comment">/*!40101 SET @saved_cs_client     = @@character_set_client */</span>;</span><br><span class="line"> <span class="keyword">SET</span> character_set_client = utf8mb4 ;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`user`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`username`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`password`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`username_index`</span> (<span class="string">`username`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">9</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4 <span class="keyword">COLLATE</span>=utf8mb4_0900_ai_ci;</span><br><span class="line"><span class="comment">/*!40101 SET character_set_client = @saved_cs_client */</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--</span></span><br><span class="line"><span class="comment">-- Dumping data for table `user`</span></span><br><span class="line"><span class="comment">--</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">LOCK</span> <span class="keyword">TABLES</span> <span class="string">`user`</span> WRITE;</span><br><span class="line"><span class="comment">/*!40000 ALTER TABLE `user` DISABLE KEYS */</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`user`</span> <span class="keyword">VALUES</span> (<span class="number">1</span>,<span class="string">'zhangsan'</span>,<span class="string">'202cb962ac59075b964b07152d234b70'</span>),(<span class="number">3</span>,<span class="string">'5'</span>,<span class="string">'123'</span>),(<span class="number">4</span>,<span class="string">'4'</span>,<span class="string">'456'</span>),(<span class="number">5</span>,<span class="string">'5'</span>,<span class="string">'123'</span>),(<span class="number">6</span>,<span class="string">'6'</span>,<span class="string">'6'</span>),(<span class="number">7</span>,<span class="string">'7'</span>,<span class="string">'21'</span>);</span><br><span class="line"><span class="comment">/*!40000 ALTER TABLE `user` ENABLE KEYS */</span>;</span><br><span class="line"><span class="keyword">UNLOCK</span> <span class="keyword">TABLES</span>;</span><br><span class="line"><span class="comment">/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*!40101 SET SQL_MODE=@OLD_SQL_MODE */</span>;</span><br><span class="line"><span class="comment">/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */</span>;</span><br><span class="line"><span class="comment">/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */</span>;</span><br><span class="line"><span class="comment">/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */</span>;</span><br><span class="line"><span class="comment">/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */</span>;</span><br><span class="line"><span class="comment">/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */</span>;</span><br><span class="line"><span class="comment">/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Dump completed on 2020-04-30 13:53:19</span></span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -217,11 +273,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
         		</li>
       		
 		</ul>
@@ -277,7 +329,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/16/leetcode-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/30/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,18 +343,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/16/leetcode-94-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/30/Spring-Boot-%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%BA%90/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          leetcode---94.二叉树的中序遍历
+          Spring Boot 动态切换数据源
         
       </div>
     </a>
   
   
-    <a href="/2020/04/15/leetcode-20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">leetcode---20.有效的括号</div>
+    <a href="/2020/04/27/leetcode-402-%E7%A7%BB%E6%8E%89K%E4%BD%8D%E6%95%B0%E5%AD%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode---402.移掉K位数字</div>
       <i class="icon-circle-right"></i>
     </a>
   
