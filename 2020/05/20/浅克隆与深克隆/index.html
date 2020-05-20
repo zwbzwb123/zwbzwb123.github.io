@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>leetcode---150.逆波兰表达式求值 | ZWBLOG</title>
+  <title>浅克隆与深克隆 | ZWBLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="根据逆波兰表示法，求表达式的值。 有效的运算符包括 +, -, *, &#x2F; 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。 说明： 整数除法只保留整数部分。给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。">
+  <meta name="description" content="简要概述 java 中的浅克隆与深克隆 以及实现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode---150.逆波兰表达式求值">
-<meta property="og:url" content="http://yoursite.com/2020/04/18/leetcode-150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:title" content="浅克隆与深克隆">
+<meta property="og:url" content="http://yoursite.com/2020/05/20/%E6%B5%85%E5%85%8B%E9%9A%86%E4%B8%8E%E6%B7%B1%E5%85%8B%E9%9A%86/index.html">
 <meta property="og:site_name" content="ZWBLOG">
-<meta property="og:description" content="根据逆波兰表示法，求表达式的值。 有效的运算符包括 +, -, *, &#x2F; 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。 说明： 整数除法只保留整数部分。给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。">
+<meta property="og:description" content="简要概述 java 中的浅克隆与深克隆 以及实现">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-18T04:55:15.000Z">
-<meta property="article:modified_time" content="2020-04-21T06:10:05.226Z">
+<meta property="article:published_time" content="2020-05-20T05:30:54.000Z">
+<meta property="article:modified_time" content="2020-05-20T06:08:40.470Z">
 <meta property="article:author" content="ZWB">
-<meta property="article:tag" content="数据结构与算法">
-<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="java基础">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ZWBLOG" type="application/atom+xml">
@@ -152,39 +151,58 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-leetcode-150-逆波兰表达式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-浅克隆与深克隆" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      leetcode---150.逆波兰表达式求值
+      浅克隆与深克隆
     </h1>
   
 
         
-        <a href="/2020/04/18/leetcode-150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2020-04-18T04:55:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
+        <a href="/2020/05/20/%E6%B5%85%E5%85%8B%E9%9A%86%E4%B8%8E%E6%B7%B1%E5%85%8B%E9%9A%86/" class="archive-article-date">
+  	<time datetime="2020-05-20T05:30:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>根据逆波兰表示法，求表达式的值。</p>
-<p>有效的运算符包括 +, -, *, / 。每个运算对象可以是整数，也可以是另一个逆波兰表达式。</p>
-<p>说明：</p>
-<p>整数除法只保留整数部分。<br>给定逆波兰表达式总是有效的。换句话说，表达式总会得出有效数值且不存在除数为 0 的情况。</p>
+        <p>简要概述 java 中的浅克隆与深克隆 以及实现</p>
 <a id="more"></a>
 
-<p>示例 1：</p>
-<p>输入: [“2”, “1”, “+”, “3”, “*”]<br>输出: 9<br>解释: ((2 + 1) * 3) = 9<br>示例 2：</p>
-<p>输入: [“4”, “13”, “5”, “/“, “+”]<br>输出: 6<br>解释: (4 + (13 / 5)) = 6<br>示例 3：</p>
-<p>输入: [“10”, “6”, “9”, “3”, “+”, “-11”, “*”, “/“, “*”, “17”, “+”, “5”, “+”]<br>输出: 22<br>解释:<br>  ((10 * (6 / ((9 + 3) * -11))) + 17) + 5<br>= ((10 * (6 / (12 * -11))) + 17) + 5<br>= ((10 * (6 / -132)) + 17) + 5<br>= ((10 * 0) + 17) + 5<br>= (0 + 17) + 5<br>= 17 + 5<br>= 22</p>
-<p>思路：遍历输入，判断是否为运算符，是则弹出两位栈顶元素，计算后再入栈。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">evalRPN</span><span class="params">(String[] tokens)</span> </span>&#123;</span><br><span class="line"><span class="keyword">if</span> (tokens.length==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (String item:tokens)&#123;</span><br><span class="line">            <span class="keyword">switch</span> (item)&#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"+"</span>:</span><br><span class="line">                    <span class="keyword">int</span> i = stack.pop() + stack.pop();</span><br><span class="line">                    stack.push(i);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"-"</span>:</span><br><span class="line">                    <span class="keyword">int</span> right = stack.pop();</span><br><span class="line">                    stack.push(stack.pop()-right);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"*"</span>:</span><br><span class="line">                    stack.push(stack.pop()*stack.pop());</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">"/"</span>:</span><br><span class="line">                    <span class="keyword">int</span> under = stack.pop();</span><br><span class="line">                    stack.push(stack.pop()/under);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    stack.push(Integer.valueOf(item));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stack.pop();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>浅克隆与深克隆的主要区别在于如何处理原型对象中的引用类型，浅克隆是把引用对象的地址共享给克隆对象，而深克隆，则是把引用对象也复制一份交给克隆对象。</strong></p>
+<p>原型对象需要实现 Cloneable 接口才能调用 clone() 方法，否则会抛出<code>CloneNotSupportedException</code>异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CloneExample</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        Student student = <span class="keyword">new</span> Student(<span class="string">"zs"</span>,<span class="keyword">new</span> Address(<span class="string">"武汉"</span>));</span><br><span class="line">        Student cloneStu = (Student) student.clone();</span><br><span class="line">        System.out.println(student == cloneStu); <span class="comment">//false</span></span><br><span class="line">        System.out.println(student.getAddress() == cloneStu.getAddress()); <span class="comment">//true</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123;</span><br><span class="line">        String name;</span><br><span class="line">        Address address;</span><br><span class="line">        <span class="comment">//省略构造 以及 GETTER、SETTER</span></span><br><span class="line">        </span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span></span>&#123;</span><br><span class="line">         <span class="comment">//省略构造 以及 GETTER、SETTER</span></span><br><span class="line">        String address;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>通过上述方式，则简单的实现了浅克隆，调用 main 方法，可以看到，引用对象之间比较地址返回 true，说明共享了内存地址。</p>
+<h4 id="如何实现深克隆？"><a href="#如何实现深克隆？" class="headerlink" title="如何实现深克隆？"></a>如何实现深克隆？</h4><ul>
+<li>所有引用对象都实现 Cloneable 接口 ，修改上述代码如下。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CloneExample</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        Student student = <span class="keyword">new</span> Student(<span class="string">"zs"</span>,<span class="keyword">new</span> Address(<span class="string">"武汉"</span>));</span><br><span class="line">        Student cloneStu = (Student) student.clone();</span><br><span class="line">        System.out.println(student == cloneStu); <span class="comment">//false</span></span><br><span class="line">        System.out.println(student.getAddress() == cloneStu.getAddress()); <span class="comment">//false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123;</span><br><span class="line">        String name;</span><br><span class="line">        Address address;</span><br><span class="line">        <span class="comment">//省略构造 以及 GETTER、SETTER</span></span><br><span class="line">        </span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">            Student clone = (Student) <span class="keyword">super</span>.clone();</span><br><span class="line">            clone.setAddress((Address) <span class="keyword">this</span>.address.clone());</span><br><span class="line">            <span class="keyword">return</span> clone;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123;</span><br><span class="line">         <span class="comment">//省略构造 以及 GETTER、SETTER</span></span><br><span class="line">        String address;</span><br><span class="line">        </span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>通过构造方法实现</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Student student = <span class="keyword">new</span> Student(<span class="string">"zs"</span>,<span class="keyword">new</span> Address(<span class="string">"武汉"</span>));</span><br><span class="line">Student cloneStu = </span><br><span class="line">    <span class="keyword">new</span> Student(student.getName(),newAddress(student.getAddress().getAddress()));</span><br></pre></td></tr></table></figure>
+
+<p>这种方式简单容易实现</p>
+<ul>
+<li>通过字节流实现，先将原型对象写入到内存中的字节流，然后再从字节流读出刚刚存储的信息，作为一个新的对象返回</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">clone</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ByteArrayOutputStream  os = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(os);</span><br><span class="line">        oos.writeObject(<span class="keyword">this</span>);</span><br><span class="line">        ByteArrayInputStream is = <span class="keyword">new</span> ByteArrayInputStream(os.toByteArray());</span><br><span class="line">        ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(is);</span><br><span class="line">        Student cloneStu = (Student) ois.readObject();</span><br><span class="line">        <span class="keyword">return</span> cloneStu;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="comment">//close</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>还可以通过第三方工具类实现 如：Apache Commons Lang </li>
+<li>通过 JSON 工具类实现 如 FastJson、Gson，主要思路为先将原型对象转为字符串，再转回为对象，这样就不会与原型对象有任何关联。</li>
+</ul>
 
       
 
@@ -198,11 +216,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">java基础</a>
         		</li>
       		
 		</ul>
@@ -258,7 +272,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/18/leetcode-150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/20/%E6%B5%85%E5%85%8B%E9%9A%86%E4%B8%8E%E6%B7%B1%E5%85%8B%E9%9A%86/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -272,18 +286,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/20/leetcode-173-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          leetcode---173.二叉搜索树迭代器
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/17/leetcode-103-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">leetcode---103.二叉树的锯齿形层次遍历</div>
+    <a href="/2020/05/14/leetcode-55-%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode---55.跳跃游戏</div>
       <i class="icon-circle-right"></i>
     </a>
   
