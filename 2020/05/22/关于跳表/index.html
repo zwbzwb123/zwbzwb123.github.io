@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 数据结构与算法 | ZWBLOG</title>
+  <title>关于跳表 | ZWBLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="ZWBLOG">
-<meta property="og:url" content="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.html">
+  <meta name="description" content="简要概述跳表并实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于跳表">
+<meta property="og:url" content="http://yoursite.com/2020/05/22/%E5%85%B3%E4%BA%8E%E8%B7%B3%E8%A1%A8/index.html">
 <meta property="og:site_name" content="ZWBLOG">
+<meta property="og:description" content="简要概述跳表并实现">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-22T07:10:41.000Z">
+<meta property="article:modified_time" content="2020-05-22T08:32:43.556Z">
 <meta property="article:author" content="ZWB">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ZWBLOG" type="application/atom+xml">
@@ -146,60 +151,178 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-关于跳表" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/04/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-04-04T11:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-04</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/04/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%95%B4%E7%90%86/">常见的排序算法整理</a>
+    <h1 class="article-title" itemprop="name">
+      关于跳表
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/05/22/%E5%85%B3%E4%BA%8E%E8%B7%B3%E8%A1%A8/" class="archive-article-date">
+  	<time datetime="2020-05-22T07:10:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>简要概述跳表并实现</p>
+<a id="more"></a>
+
+<p>二分查找适用于数组而不适用于链表这一数据结构，那么如何在 O(logn) 的时间复杂度当中从链表中查找某一个值呢？可以用跳表（Skip list）。Redis 当中的有序集合也是利用跳表实现的。</p>
+<p>对于一个单链表来说是下面这样的:</p>
+<p>1—-&gt;2—-&gt;3—-&gt;4—-&gt;5</p>
+<p>想要找到4，需要从1开始，再到2，然后到3，最后是4，如果数据量扩大，可以想象，效率非常低。</p>
+<p>如果对链表建立索引，是什么样的呢？如下：</p>
+<p>1———-&gt;3———–&gt;5</p>
+<p>⬇              ⬇                ⬇</p>
+<p>1—&gt;2—&gt;3—&gt;4—-&gt;5</p>
+<p>此时要想找到4，先是1，然后3，此时发现下一个索引5&gt;4，于是从3处降落，开始查找四，只需要三步，1，3，4，相对来说，效率有所提高。</p>
+<p>如果数据量扩大如下：</p>
+<p>1————————-&gt;5——————————–&gt;9</p>
+<p>⬇                                ⬇                                           ⬇</p>
+<p>1———-&gt;3———–&gt;5————–&gt;7————–&gt;9</p>
+<p>⬇              ⬇                ⬇                    ⬇                    ⬇</p>
+<p>1—&gt;2—&gt;3—&gt;4—-&gt;5—–&gt;6——&gt;7——&gt;8—–&gt;9——&gt;10</p>
+<p>若要查找9，只需要通过 1，5，9 三步</p>
+<p>若要查找8，只需要通过 1，5，7，8 四步，这样效率就提高不少，从跳表中查找数据的时间复杂度为O(logn)。</p>
+<p>不过，可以看到，跳表建立了非常多的索引，比较占用额外空间，空间复杂度为O(n)。</p>
+<p>简单实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SkipList</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> MAX_INDEX_LEVEL = <span class="number">16</span>;</span><br><span class="line">    <span class="keyword">private</span> Node head = <span class="keyword">new</span> Node();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> currentMaxLevel = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> level = randomLevel();</span><br><span class="line">        Node newNode = <span class="keyword">new</span> Node(value, level);</span><br><span class="line">        Node p = head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = level - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">while</span> (p.forwords != <span class="keyword">null</span> &amp;&amp; p.forwords[i] != <span class="keyword">null</span> &amp;&amp; p.forwords[i].value &lt; newNode.value)</span><br><span class="line">                p = p.forwords[i];</span><br><span class="line">            newNode.forwords[i] = p.forwords[i];</span><br><span class="line">            p.forwords[i] = newNode;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (level &gt; currentMaxLevel)</span><br><span class="line">            currentMaxLevel = level;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Node <span class="title">find</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        Node p = head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = currentMaxLevel - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">while</span> (p.forwords[i] != <span class="keyword">null</span> &amp;&amp; p.forwords[i].value &lt;= value)</span><br><span class="line">                p = p.forwords[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (p != <span class="keyword">null</span> &amp;&amp; p.value == value)</span><br><span class="line">            <span class="keyword">return</span> p;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        Node p = head;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = currentMaxLevel - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            <span class="keyword">while</span> (p.forwords[i] != <span class="keyword">null</span> &amp;&amp; p.forwords[i].value &lt; value)</span><br><span class="line">                p = p.forwords[i];</span><br><span class="line">            <span class="keyword">if</span> (p.forwords[i] != <span class="keyword">null</span> &amp;&amp; p.forwords[i].value == value)</span><br><span class="line">                p.forwords[i] = p.forwords[i].forwords[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">randomLevel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> level = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (Math.random() &lt; <span class="number">0.5f</span> &amp;&amp; level &lt; MAX_INDEX_LEVEL)</span><br><span class="line">            level += <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> level;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> value;</span><br><span class="line">        <span class="keyword">int</span> level;</span><br><span class="line">        Node forwords[] = <span class="keyword">new</span> Node[MAX_INDEX_LEVEL];</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> value, <span class="keyword">int</span> level)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.value = value;</span><br><span class="line">            <span class="keyword">this</span>.level = level;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/22/%E5%85%B3%E4%BA%8E%E8%B7%B3%E8%A1%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/05/22/%E5%85%B3%E4%BA%8E%E6%95%A3%E5%88%97%E8%A1%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          关于散列表
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2020/05/22/%E5%85%B3%E4%BA%8E%E6%A0%88%20%E9%98%9F%E5%88%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于栈、队列</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -222,9 +345,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -288,7 +411,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -296,7 +419,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -316,7 +439,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>

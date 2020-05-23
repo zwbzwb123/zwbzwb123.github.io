@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/4 | ZWBLOG</title>
+  <title>关于散列表 | ZWBLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="ZWBLOG">
-<meta property="og:url" content="http://yoursite.com/archives/2020/04/index.html">
+  <meta name="description" content="简要概述“散列表”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于散列表">
+<meta property="og:url" content="http://yoursite.com/2020/05/22/%E5%85%B3%E4%BA%8E%E6%95%A3%E5%88%97%E8%A1%A8/index.html">
 <meta property="og:site_name" content="ZWBLOG">
+<meta property="og:description" content="简要概述“散列表”">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/resize.png">
+<meta property="article:published_time" content="2020-05-22T08:34:38.000Z">
+<meta property="article:modified_time" content="2020-05-23T06:59:22.634Z">
 <meta property="article:author" content="ZWB">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/resize.png">
   
     <link rel="alternative" href="/atom.xml" title="ZWBLOG" type="application/atom+xml">
   
@@ -146,405 +153,185 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-关于散列表" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于散列表
+    </h1>
+  
+
+        
+        <a href="/2020/05/22/%E5%85%B3%E4%BA%8E%E6%95%A3%E5%88%97%E8%A1%A8/" class="archive-article-date">
+  	<time datetime="2020-05-22T08:34:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-22</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>简要概述“散列表”</p>
+<a id="more"></a>
+
+<p>散列表又称”哈希表”，是一种键值对的数据结构，键通过散列函数映射至表中的某一个位置来得到值，表实际上就是一个数组，利用它能通过下标支持随机访问的特性，可以快速的定位到值的位置。</p>
+<p>类似于字典，当你想从字典中查找某一个字的时候，不可能翻遍整本字典吧？当然是去查看它的笔画、偏旁等找到的具体的某一页。键就相当于值的笔画、偏旁，通过它你可以锁定值的大概区域，然后就可以很快的找到它。</p>
+<h4 id="散列函数"><a href="#散列函数" class="headerlink" title="散列函数"></a>散列函数</h4><p>通过上面的介绍，可以知道散列函数在散列表中是非常重要的。一个好的散列函数能提高查找的效率，更快速的定位值。参考 JDK1.8 HashMap#put 方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> putVal(hash(key), key, value, <span class="keyword">false</span>, <span class="keyword">true</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> h;</span><br><span class="line">       <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">final</span> V <span class="title">putVal</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">boolean</span> onlyIfAbsent,</span></span></span><br><span class="line"><span class="function"><span class="params">                  <span class="keyword">boolean</span> evict)</span> </span>&#123;</span><br><span class="line">   <span class="comment">//方法内其中一小部分</span></span><br><span class="line"> <span class="keyword">if</span> ((tab = table) == <span class="keyword">null</span> || (n = tab.length) == <span class="number">0</span>)</span><br><span class="line">           n = (tab = resize()).length;</span><br><span class="line">    <span class="keyword">if</span> ((p = tab[i = (n - <span class="number">1</span>) &amp; hash]) == <span class="keyword">null</span>)</span><br><span class="line">           tab[i] = newNode(hash, key, value, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，通过传入 key 拿到一个 int 类型返回数，再与表的大小进行 “与” 运算，就可以得到值在数组中的下标。上面的 <code>hash(Object key)</code>就可以看作是HashMap的散列函数。</p>
+<h4 id="散列冲突"><a href="#散列冲突" class="headerlink" title="散列冲突"></a>散列冲突</h4><p>首先要明确一点，再好的散列函数也无法避免散列冲突。</p>
+<p>如果 key==key ，那么 hash(key) == hash(key)</p>
+<p>但如果 key != key , 那么 hash(key) 不一定 != hash(key)</p>
+<p>再加上数组的大小是有限的，例如HashMap如果没有指定初始大小，那么它默认的数组长度为 16。</p>
+<p><code>static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // 16</code></p>
+<p>如果 put 17个键值对（假设没有扩容的话），那么至少会有两对，通过 “与” 运算，进入到同一个槽中的。那么解决呢？常用的大概就是两种方法：<strong>链表法</strong>和<strong>开放寻址法</strong>。</p>
+<p><strong>链表法</strong>很好理解：每一个槽位都是一条链表，如果进入到同一个槽位的话，则以链表的形式连接，查找的时候，通过 key 来取值。 JDK1.7 的 HashMap就是数组+链表，而JDK1.8 的 HashMap 则是数组+链表+红黑树。确保了如果一条链表过于长的话，不会导致性能退化。链表转红黑树的条件是 容量&gt;=64 、单链表长度达到 8个。</p>
+<p><code>HashMap#get(key)</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> Node&lt;K,V&gt; <span class="title">getNode</span><span class="params">(<span class="keyword">int</span> hash, Object key)</span> </span>&#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; <span class="keyword">int</span> n; K k;</span><br><span class="line">    <span class="keyword">if</span> ((tab = table) != <span class="keyword">null</span> &amp;&amp; (n = tab.length) &gt; <span class="number">0</span> &amp;&amp;</span><br><span class="line">        (first = tab[(n - <span class="number">1</span>) &amp; hash]) != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (first.hash == hash &amp;&amp; <span class="comment">// always check first node</span></span><br><span class="line">            ((k = first.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">            <span class="keyword">return</span> first;</span><br><span class="line">        <span class="keyword">if</span> ((e = first.next) != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (first <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">                <span class="keyword">return</span> ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">                    <span class="keyword">return</span> e;</span><br><span class="line">            &#125; <span class="keyword">while</span> ((e = e.next) != <span class="keyword">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>开放寻址法：</strong>如果发生连散列冲突，则重新探测一个位置。探测方法常用的也有两种：线性探测和双重散列。</p>
+<p>线性探测很简单，如果散列到的数组下标为0，此时0如果已经有元素了，那么就去1，如果1也有了，那么去2，直至一个地方为空，则插入元素。</p>
+<p>双重散列顾名思义，准备一组散列函数，如果hash1()计算的到的存储位置已经被占了，则使用hash2()、hash3()…,直至找到一个没有被占用的地方。</p>
+<h4 id="装载因子"><a href="#装载因子" class="headerlink" title="装载因子"></a>装载因子</h4><p>无论使用哪种方法，都应该尽量避免散列冲突，所以应该保证散列表有一定的空位，当表中槽位不够时，应该进行适当的扩容。</p>
+<p>散列表的装载因子=填入表中的元素个数/散列表的长度</p>
+<p>装载因子越大，说明空闲位置越少，冲突越多，散列表的性能会下降。</p>
+<p>HashMap 默认装载因子为 0.75，也就是说如果容量是16，当表中有13对键值对时，就会触发扩容。</p>
+<p><code>static final float DEFAULT_LOAD_FACTOR = 0.75f;</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (++size &gt; threshold)</span><br><span class="line">       resize();</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="扩容"><a href="#扩容" class="headerlink" title="扩容"></a>扩容</h4><p>HashMap JDK1.8 相较于 JDK 1.7有了优化，包括resize 扩容优化。</p>
+<p>JDK1.7 扩容时会把每一个元素重新计算hash值并用头插法放入新表。如果数据很多，重新计算hash就够花时间了，在并发情况下，头插法有可能会导致链表循环。</p>
+<p>JDK1.8 改为了尾插法，并且不需要重计算hash值，但仍然是线程不安全的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> Node&lt;K,V&gt;[] resize() &#123;</span><br><span class="line">       Node&lt;K,V&gt;[] oldTab = table;</span><br><span class="line">       <span class="keyword">int</span> oldCap = (oldTab == <span class="keyword">null</span>) ? <span class="number">0</span> : oldTab.length;</span><br><span class="line">       <span class="keyword">int</span> oldThr = threshold;</span><br><span class="line">       <span class="keyword">int</span> newCap, newThr = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">if</span> (oldCap &gt; <span class="number">0</span>) &#123;</span><br><span class="line">           <span class="keyword">if</span> (oldCap &gt;= MAXIMUM_CAPACITY) &#123;</span><br><span class="line">               threshold = Integer.MAX_VALUE;</span><br><span class="line">               <span class="keyword">return</span> oldTab;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">else</span> <span class="keyword">if</span> ((newCap = oldCap &lt;&lt; <span class="number">1</span>) &lt; MAXIMUM_CAPACITY &amp;&amp;</span><br><span class="line">                    oldCap &gt;= DEFAULT_INITIAL_CAPACITY)</span><br><span class="line">               newThr = oldThr &lt;&lt; <span class="number">1</span>; <span class="comment">// double threshold</span></span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">else</span> <span class="keyword">if</span> (oldThr &gt; <span class="number">0</span>) <span class="comment">// initial capacity was placed in threshold</span></span><br><span class="line">           newCap = oldThr;</span><br><span class="line">       <span class="keyword">else</span> &#123;               <span class="comment">// zero initial threshold signifies using defaults</span></span><br><span class="line">           newCap = DEFAULT_INITIAL_CAPACITY;</span><br><span class="line">           newThr = (<span class="keyword">int</span>)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (newThr == <span class="number">0</span>) &#123;</span><br><span class="line">           <span class="keyword">float</span> ft = (<span class="keyword">float</span>)newCap * loadFactor;</span><br><span class="line">           newThr = (newCap &lt; MAXIMUM_CAPACITY &amp;&amp; ft &lt; (<span class="keyword">float</span>)MAXIMUM_CAPACITY ?</span><br><span class="line">                     (<span class="keyword">int</span>)ft : Integer.MAX_VALUE);</span><br><span class="line">       &#125;</span><br><span class="line">       threshold = newThr;</span><br><span class="line">       <span class="meta">@SuppressWarnings</span>(&#123;<span class="string">"rawtypes"</span>,<span class="string">"unchecked"</span>&#125;)</span><br><span class="line">       Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])<span class="keyword">new</span> Node[newCap];</span><br><span class="line">       table = newTab;</span><br><span class="line">       <span class="keyword">if</span> (oldTab != <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; oldCap; ++j) &#123;</span><br><span class="line">               Node&lt;K,V&gt; e;</span><br><span class="line">               <span class="keyword">if</span> ((e = oldTab[j]) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                   oldTab[j] = <span class="keyword">null</span>;</span><br><span class="line">                   <span class="keyword">if</span> (e.next == <span class="keyword">null</span>)</span><br><span class="line">                       newTab[e.hash &amp; (newCap - <span class="number">1</span>)] = e;</span><br><span class="line">                   <span class="keyword">else</span> <span class="keyword">if</span> (e <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">                       ((TreeNode&lt;K,V&gt;)e).split(<span class="keyword">this</span>, newTab, j, oldCap);</span><br><span class="line">                   <span class="keyword">else</span> &#123; <span class="comment">// preserve order</span></span><br><span class="line">                       Node&lt;K,V&gt; loHead = <span class="keyword">null</span>, loTail = <span class="keyword">null</span>;</span><br><span class="line">                       Node&lt;K,V&gt; hiHead = <span class="keyword">null</span>, hiTail = <span class="keyword">null</span>;</span><br><span class="line">                       Node&lt;K,V&gt; next;</span><br><span class="line">                       <span class="keyword">do</span> &#123;</span><br><span class="line">                           next = e.next;</span><br><span class="line">                           <span class="keyword">if</span> ((e.hash &amp; oldCap) == <span class="number">0</span>) &#123;</span><br><span class="line">                               <span class="keyword">if</span> (loTail == <span class="keyword">null</span>)</span><br><span class="line">                                   loHead = e;</span><br><span class="line">                               <span class="keyword">else</span></span><br><span class="line">                                   loTail.next = e;</span><br><span class="line">                               loTail = e;</span><br><span class="line">                           &#125;</span><br><span class="line">                           <span class="keyword">else</span> &#123;</span><br><span class="line">                               <span class="keyword">if</span> (hiTail == <span class="keyword">null</span>)</span><br><span class="line">                                   hiHead = e;</span><br><span class="line">                               <span class="keyword">else</span></span><br><span class="line">                                   hiTail.next = e;</span><br><span class="line">                               hiTail = e;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125; <span class="keyword">while</span> ((e = next) != <span class="keyword">null</span>);</span><br><span class="line">                       <span class="keyword">if</span> (loTail != <span class="keyword">null</span>) &#123;</span><br><span class="line">                           loTail.next = <span class="keyword">null</span>;</span><br><span class="line">                           newTab[j] = loHead;</span><br><span class="line">                       &#125;</span><br><span class="line">                       <span class="keyword">if</span> (hiTail != <span class="keyword">null</span>) &#123;</span><br><span class="line">                           hiTail.next = <span class="keyword">null</span>;</span><br><span class="line">                           newTab[j + oldCap] = hiHead;</span><br><span class="line">                       &#125;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> newTab;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以看到，JDK1.8扩容时，元素的位置要么是在原来的原址，要么是原位置+oldCap，可以看下图</p>
+<p>a 是扩容前确定位置的二进制运算 ，b 是扩容后确定位置的二进制运算，所以它是判断key 的hash 值高一位是否为0，如果是，则不变，否则+oldCap即可。</p>
+<p><img src="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/resize.png" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/Spring-Boot-%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%BA%90/" class="archive-article-date">
-  	<time datetime="2020-04-30T09:23:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/Spring-Boot-%E5%8A%A8%E6%80%81%E5%88%87%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%BA%90/">Spring Boot 动态切换数据源</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/22/%E5%85%B3%E4%BA%8E%E6%95%A3%E5%88%97%E8%A1%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/30/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" class="archive-article-date">
-  	<time datetime="2020-04-30T07:21:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-30</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/22/%E5%85%B3%E4%BA%8E%E8%B7%B3%E8%A1%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于跳表</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/30/MySQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">MySQL主从复制</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/27/leetcode-402-%E7%A7%BB%E6%8E%89K%E4%BD%8D%E6%95%B0%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2020-04-27T05:04:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/27/leetcode-402-%E7%A7%BB%E6%8E%89K%E4%BD%8D%E6%95%B0%E5%AD%97/">leetcode---402.移掉K位数字</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/26/leetcode-394-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81/" class="archive-article-date">
-  	<time datetime="2020-04-26T09:27:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/26/leetcode-394-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%A3%E7%A0%81/">leetcode---394.字符串解码</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/21/leetcode-331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2020-04-21T04:52:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/21/leetcode-331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96/">leetcode---331. 验证二叉树的前序序列化</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/20/leetcode-173-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2020-04-20T10:44:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/20/leetcode-173-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8/">leetcode---173.二叉搜索树迭代器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/18/leetcode-150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2020-04-18T04:55:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/18/leetcode-150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/">leetcode---150.逆波兰表达式求值</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/17/leetcode-103-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/" class="archive-article-date">
-  	<time datetime="2020-04-17T05:09:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/17/leetcode-103-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%94%AF%E9%BD%BF%E5%BD%A2%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">leetcode---103.二叉树的锯齿形层次遍历</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/16/leetcode-94-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/" class="archive-article-date">
-  	<time datetime="2020-04-16T05:51:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/16/leetcode-94-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86/">leetcode---94.二叉树的中序遍历</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/16/leetcode-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/" class="archive-article-date">
-  	<time datetime="2020-04-16T05:17:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/16/leetcode-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/">leetcode---71.简化路径</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2020/04/page/2/">2</a><a class="page-number" href="/archives/2020/04/page/3/">3</a><a class="extend next" rel="next" href="/archives/2020/04/page/2/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -568,8 +355,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

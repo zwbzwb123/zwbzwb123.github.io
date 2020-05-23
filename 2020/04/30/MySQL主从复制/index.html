@@ -16,7 +16,7 @@
 <meta property="og:description" content="概述：主从复制是指将主数据库的DDL和DML操作通过二进制日志(bin log)传到从库服务器上，然后从库对这些日志重新执行，从而使得从库和主库的数据保持同步。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-30T07:21:07.000Z">
-<meta property="article:modified_time" content="2020-05-01T05:35:05.425Z">
+<meta property="article:modified_time" content="2020-05-22T08:37:23.198Z">
 <meta property="article:author" content="ZWB">
 <meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
@@ -187,25 +187,21 @@
 <li>可以在从库中执行备份，以避免备份期间影响主库的服务</li>
 </ul>
 <p><strong>搭建步骤</strong></p>
-<ol>
-<li><p>准备两台服务器</p>
-</li>
-<li><p>主节点配置文件部分如下</p>
+<p>准备两台服务器</p>
+<p>主节点配置文件部分如下</p>
 <ul>
 <li>server-id=1 mysql 服务id 保证整个集群环境唯一</li>
 <li>log-bin=”mysql-bin”  binlog存储路径和文件名</li>
 <li>read-only=0  1表示只读，0表示读写</li>
 <li>binlog-ignore-db=mysql 不需要同步的数据库</li>
 </ul>
-</li>
-<li><p>主库执行如下操作</p>
+<p>主库执行如下操作</p>
 <ul>
 <li>grant replication slave on *.* to ‘user’@’198.168.0.123’ identified by ‘111111’</li>
 <li>flush privileges  刷新</li>
 <li>master show status 查看信息</li>
 </ul>
-</li>
-<li><p>从节点配置如下</p>
+<p>从节点配置如下</p>
 <ul>
 <li>添加：relay-log=relay-log</li>
 <li>添加：relay-log-index=relay-log.index</li>
@@ -213,15 +209,12 @@
 <li>添加：innodb_file_per_table=ON</li>
 <li>添加：skip_name_resolve=ON</li>
 </ul>
-</li>
-<li><p>从库执行如下操作</p>
+<p>从库执行如下操作</p>
 <ul>
 <li>change master to master_host= ‘192.168.0.111’,master_user=’root’,master_password=’111111’,master_log_file=’mysql-bin.000001’,master_log_pos=111;</li>
 <li>start slave</li>
 <li>show slave status\G</li>
 </ul>
-</li>
-</ol>
 <h5 id="关于-mysqldump"><a href="#关于-mysqldump" class="headerlink" title="关于 mysqldump"></a>关于 mysqldump</h5><p>mysqldump 客户端工具用来备份数据或在不同数据库之间进行数据迁移，备份的内容包括创建表，插入表的SQL语句</p>
 <p>语法：</p>
 <p>mysqldump -u 指定用户名 -p 指定密码 -h 指定ip或域名 -P 指定端口     db_name [tables 如果不写表名，则表示备份全部表] / -B db1 db2 db3 / -A</p>
@@ -450,7 +443,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -458,7 +451,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -478,7 +471,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
