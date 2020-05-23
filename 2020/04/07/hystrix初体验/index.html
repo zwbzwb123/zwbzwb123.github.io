@@ -15,14 +15,14 @@
 <meta property="og:site_name" content="ZWBLOG">
 <meta property="og:description" content="继上一篇 Ribbon初体验，简要概述 Spring Cloud 中的 Hystrix">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://q89emimpd.bkt.clouddn.com/hystrix-dashboard.png">
-<meta property="og:image" content="http://q89emimpd.bkt.clouddn.com/dashboard.png">
+<meta property="og:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/hystrix-dashboard.png">
+<meta property="og:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/hystrix.png">
 <meta property="article:published_time" content="2020-04-07T12:15:38.000Z">
-<meta property="article:modified_time" content="2020-04-09T05:31:50.703Z">
+<meta property="article:modified_time" content="2020-05-23T07:09:34.289Z">
 <meta property="article:author" content="ZWB">
 <meta property="article:tag" content="Spring Cloud">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://q89emimpd.bkt.clouddn.com/hystrix-dashboard.png">
+<meta name="twitter:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/hystrix-dashboard.png">
   
     <link rel="alternative" href="/atom.xml" title="ZWBLOG" type="application/atom+xml">
   
@@ -216,13 +216,13 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableHystrixDashboard</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HystrixDashboardApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(HystrixDashboardApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>启动应用后， 访问 <a href="http://localhost:9092/hystrix" target="_blank" rel="noopener">http://localhost:9092/hystrix</a> 即可进入 hystrix dashboard</p>
-<p><img src="http://q89emimpd.bkt.clouddn.com/hystrix-dashboard.png" alt=""></p>
+<p><img src="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/hystrix-dashboard.png" alt=""></p>
 <p><strong>注意，高版本的 Spring Cloud 被监控的应用需要添加以下 Bean 才行</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> ServletRegistrationBean <span class="title">getServlet</span><span class="params">()</span></span>&#123;</span><br><span class="line">      HystrixMetricsStreamServlet streamServlet = <span class="keyword">new</span> HystrixMetricsStreamServlet();</span><br><span class="line">      ServletRegistrationBean registrationBean = <span class="keyword">new</span> ServletRegistrationBean(streamServlet);</span><br><span class="line">      registrationBean.setLoadOnStartup(<span class="number">1</span>);</span><br><span class="line">      registrationBean.addUrlMappings(<span class="string">"/actuator/hystrix.stream"</span>);</span><br><span class="line">      registrationBean.setName(<span class="string">"HystrixMetricsStreamServlet"</span>);</span><br><span class="line">      <span class="keyword">return</span> registrationBean;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
 <p>然后在Hystrix Dashboard 中间地址栏填入要监控的应用的信息即可</p>
 <p>如 <a href="http://localhost:8080/actuator/hystrix.stream" target="_blank" rel="noopener">http://localhost:8080/actuator/hystrix.stream</a></p>
-<p><img src="http://q89emimpd.bkt.clouddn.com/dashboard.png" alt=""></p>
+<p><img src="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/hystrix.png" alt=""></p>
 
       
 
@@ -439,7 +439,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -447,7 +447,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
               </li>
              
               <li class="article-tag-list-item">

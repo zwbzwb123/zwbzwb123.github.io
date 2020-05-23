@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="ZWBLOG">
 <meta property="og:description" content="​    OpenFeign 也是Spring Cloud 提供的组件之一，用来完成服务间的调用。本文简要概述利用 openFeign 来完成服务调用。OpenFeign 集成了 Ribbon ，能够实现客户端的负载均衡，与 Ribbon + RestTemplate 不同的是，Feign只需要定义服务绑定接口，就能简单的完成服务调用。 ​">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://q89emimpd.bkt.clouddn.com/feign.png">
+<meta property="og:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/openFeign.png">
 <meta property="article:published_time" content="2020-04-08T06:44:24.000Z">
-<meta property="article:modified_time" content="2020-04-08T09:02:55.715Z">
+<meta property="article:modified_time" content="2020-05-23T07:13:26.137Z">
 <meta property="article:author" content="ZWB">
 <meta property="article:tag" content="Spring Cloud">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://q89emimpd.bkt.clouddn.com/feign.png">
+<meta name="twitter:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/openFeign.png">
   
     <link rel="alternative" href="/atom.xml" title="ZWBLOG" type="application/atom+xml">
   
@@ -200,7 +200,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FeignClientController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    GreetingService service;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/consumer/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">greeting</span><span class="params">(@RequestBody Person person)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span>  service.greeting(person);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>通过 Postman 进行测试，访问 <a href="http://localhost:9091/consumer/hello" target="_blank" rel="noopener">http://localhost:9091/consumer/hello</a></strong> </p>
-<p><img src="http://q89emimpd.bkt.clouddn.com/feign.png" alt=""></p>
+<p><img src="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/openFeign.png" alt=""></p>
 <hr>
 <h3 id="超时控制"><a href="#超时控制" class="headerlink" title="超时控制"></a>超时控制</h3><p>默认的 openFeign 客户端只会等待一秒钟，如果服务端处理需要超过一秒钟，那么 openFeign则不会等待，直接报错，所以我们需要设置 openFeign 客户端的超时控制</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"timestamp"</span>: <span class="string">"2020-04-08T07:22:30.049+0000"</span>,</span><br><span class="line">    <span class="attr">"status"</span>: <span class="number">500</span>,</span><br><span class="line">    <span class="attr">"error"</span>: <span class="string">"Internal Server Error"</span>,</span><br><span class="line">    <span class="attr">"message"</span>: <span class="string">"Read timed out executing POST http://hello-service-provider/hello"</span>,</span><br><span class="line">    <span class="attr">"path"</span>: <span class="string">"/consumer/hello"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -439,7 +439,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -447,7 +447,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
               </li>
              
               <li class="article-tag-list-item">

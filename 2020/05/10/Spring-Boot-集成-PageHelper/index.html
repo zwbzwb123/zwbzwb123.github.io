@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>leetcode---503.下一个更大元素 II | ZWBLOG</title>
+  <title>Spring Boot 集成 PageHelper | ZWBLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="给定一个循环数组（最后一个元素的下一个元素是数组的第一个元素），输出每个元素的下一个更大元素。数字 x 的下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1。">
+  <meta name="description" content="简要概述 Spring Boot 集成 PageHelper + MyBatis 实现分页查询">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode---503.下一个更大元素 II">
-<meta property="og:url" content="http://yoursite.com/2020/05/05/leetcode-503-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-II/index.html">
+<meta property="og:title" content="Spring Boot 集成 PageHelper">
+<meta property="og:url" content="http://yoursite.com/2020/05/10/Spring-Boot-%E9%9B%86%E6%88%90-PageHelper/index.html">
 <meta property="og:site_name" content="ZWBLOG">
-<meta property="og:description" content="给定一个循环数组（最后一个元素的下一个元素是数组的第一个元素），输出每个元素的下一个更大元素。数字 x 的下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1。">
+<meta property="og:description" content="简要概述 Spring Boot 集成 PageHelper + MyBatis 实现分页查询">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-05T04:46:15.000Z">
-<meta property="article:modified_time" content="2020-05-21T07:19:58.465Z">
+<meta property="article:published_time" content="2020-05-10T07:07:16.000Z">
+<meta property="article:modified_time" content="2020-05-23T07:23:40.622Z">
 <meta property="article:author" content="ZWB">
-<meta property="article:tag" content="leetcode">
+<meta property="article:tag" content="SpringBoot">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ZWBLOG" type="application/atom+xml">
@@ -151,34 +151,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-leetcode-503-下一个更大元素-II" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Spring-Boot-集成-PageHelper" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      leetcode---503.下一个更大元素 II
+      Spring Boot 集成 PageHelper
     </h1>
   
 
         
-        <a href="/2020/05/05/leetcode-503-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-II/" class="archive-article-date">
-  	<time datetime="2020-05-05T04:46:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-05</time>
+        <a href="/2020/05/10/Spring-Boot-%E9%9B%86%E6%88%90-PageHelper/" class="archive-article-date">
+  	<time datetime="2020-05-10T07:07:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>给定一个循环数组（最后一个元素的下一个元素是数组的第一个元素），输出每个元素的下一个更大元素。数字 x 的下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1。</p>
+        <p>简要概述 Spring Boot 集成 PageHelper + MyBatis 实现分页查询</p>
 <a id="more"></a>
 
-<p>示例 1:</p>
-<p>输入: [1,2,1]<br>输出: [2,-1,2]<br>解释: 第一个 1 的下一个更大的数是 2；<br>数字 2 找不到下一个更大的数；<br>第二个 1 的下一个最大的数需要循环搜索，结果也是 2。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] nextGreaterElements(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line"></span><br><span class="line">        LinkedList&lt;Integer&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;nums.length;i++)&#123;</span><br><span class="line">            res[i] = -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        stack.push(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">1</span>;i&lt;nums.length*<span class="number">2</span>-<span class="number">1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> curIndex = i % nums.length;</span><br><span class="line">            <span class="keyword">while</span> (!stack.isEmpty() &amp;&amp; nums[stack.peek()] &lt; nums[curIndex])&#123;</span><br><span class="line">                res[stack.pop()] = nums[curIndex];</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(curIndex);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="导入-Maven-依赖"><a href="#导入-Maven-依赖" class="headerlink" title="导入 Maven 依赖"></a>导入 Maven 依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><code>i&lt;nums.length*2-1</code>，如果遍历的数组长度*2-1，将数组遍历两次，就相当于时循环数组，通过取模来得到当前下标。栈中存放的是数组的下标，从左至右遍历，若当前下标对应的元素大于栈顶下标对应的元素，则对应下标对应的结果就是当前下标对应的元素，弹栈。此时，该元素之前所有小于它的都已找到答案，到最后，栈中存在的下标对应的元素都是最大值，到第二轮的时候，无法对栈中对应下标的元素赋 -1 ， 所以必须在开始对 结果进行初始化。</p>
+
+
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">pagehelper:</span></span><br><span class="line">  <span class="attr">helper-dialect:</span> <span class="string">mysql</span> <span class="comment">#指定数据库</span></span><br><span class="line">  <span class="attr">reasonable:</span> <span class="literal">true</span>      <span class="comment">#分页参数合理化 若pageNum&lt;1会查询第一页  pageNum&gt;总数则查询会后一页</span></span><br><span class="line"><span class="comment"># support-methods-arguments: true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">SpeechMapper mapper;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">find</span><span class="params">()</span></span>&#123;</span><br><span class="line">    PageHelper.startPage(<span class="number">0</span>,<span class="number">5</span>); <span class="comment">//第一个参数为第几页，第二个参数为每页个数</span></span><br><span class="line">    List&lt;Speech&gt; speeches = mapper.findContentByPageNum(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span> (Speech speech:speeches)&#123;</span><br><span class="line">        System.out.println(speech.toString());</span><br><span class="line">    &#125;</span><br><span class="line">     PageInfo&lt;Speech&gt; info = <span class="keyword">new</span> PageInfo&lt;&gt;(speeches);</span><br><span class="line">    System.out.println(info);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Mapper-xml"><a href="#Mapper-xml" class="headerlink" title="Mapper.xml"></a>Mapper.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span> <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.relaxingtime.mapper.SpeechMapper"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findContentByPageNum"</span> <span class="attr">resultType</span>=<span class="string">"speech"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">        select id,username,content,create_time as createTime from tb_speech</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Speech&#123;id=<span class="number">1</span>, username=<span class="string">'zazaza'</span>, content=<span class="string">'哈哈哈&lt;img width="20px" height="20px" src="/img/blush.af4d380b.png"&gt;&lt;img width="20px" height="20px" src="/img/blush.af4d380b.png"&gt;，哈哈&lt;img width="20px" height="20px" src="/img/stuck_out_tongue_closed_eyes.1273fc47.png"&gt;&lt;img width="20px" height="20px" src="/img/kissing.acf2ff3b.png"&gt;&lt;img width="20px" height="20px" src="/img/kissing.acf2ff3b.png" /&gt;'</span>, createTime=<span class="string">'2020-05-10 14:25:26'</span>&#125;</span><br><span class="line"></span><br><span class="line">Speech&#123;id=<span class="number">2</span>, username=<span class="string">'zazaza'</span>, content=<span class="string">'这是测试&lt;img width="20px" height="20px" src="/img/sleeping.99a9e3d2.png" /&gt;'</span>, createTime=<span class="string">'2020-05-10 14:25:27'</span>&#125;</span><br><span class="line"></span><br><span class="line">Speech&#123;id=<span class="number">3</span>, username=<span class="string">'zazaza'</span>, content=<span class="string">'这是测试&lt;img width="20px" height="20px" src="/img/sleeping.99a9e3d2.png" /&gt;a'</span>, createTime=<span class="string">'2020-05-10 14:25:28'</span>&#125;</span><br><span class="line"></span><br><span class="line">Speech&#123;id=<span class="number">4</span>, username=<span class="string">'zwb'</span>, content=<span class="string">'勉强用吧&lt;img width="20px" height="20px" src="/img/flushed.f455a82a.png" /&gt;'</span>, createTime=<span class="string">'2020-05-10 14:25:29'</span>&#125;</span><br><span class="line"></span><br><span class="line">Speech&#123;id=<span class="number">5</span>, username=<span class="string">'zwb'</span>, content=<span class="string">'勉强用吧&lt;img width="20px" height="20px" src="/img/flushed.f455a82a.png"&gt;&lt;img width="20px" height="20px" src="/img/kissing.acf2ff3b.png"&gt;&lt;img width="20px" height="20px" src="/img/kissing.acf2ff3b.png" /&gt;'</span>, createTime=<span class="string">'2020-05-10 14:25:30'</span>&#125;</span><br><span class="line"></span><br><span class="line">PageInfo&#123;pageNum=<span class="number">1</span>, pageSize=<span class="number">5</span>, size=<span class="number">5</span>, startRow=<span class="number">1</span>, endRow=<span class="number">5</span>, total=<span class="number">10</span>, pages=<span class="number">2</span>, list=Page&#123;count=<span class="keyword">true</span>, pageNum=<span class="number">1</span>, pageSize=<span class="number">5</span>, startRow=<span class="number">0</span>, endRow=<span class="number">5</span>, total=<span class="number">10</span>, pages=<span class="number">2</span>, reasonable=<span class="keyword">true</span>, pageSizeZero=<span class="keyword">false</span>&#125;, prePage=<span class="number">0</span>, nextPage=<span class="number">2</span>, isFirstPage=<span class="keyword">true</span>, isLastPage=<span class="keyword">false</span>, hasPreviousPage=<span class="keyword">false</span>, hasNextPage=<span class="keyword">true</span>, navigatePages=<span class="number">8</span>, navigateFirstPage=<span class="number">1</span>, navigateLastPage=<span class="number">2</span>, navigatepageNums=[<span class="number">1</span>, <span class="number">2</span>]&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以看出，虽然在SQL中没有写明 limit 限制，然后最终的查询结果却是 5 条，说明 pagehelper起了作用，更多的详细信息也可以从 PageInfo中看出。</p>
 
       
 
@@ -192,7 +210,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SpringBoot</a>
         		</li>
       		
 		</ul>
@@ -248,7 +266,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/05/leetcode-503-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-II/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/10/Spring-Boot-%E9%9B%86%E6%88%90-PageHelper/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -262,18 +280,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/05/06/leetcode-636-%E5%87%BD%E6%95%B0%E7%9A%84%E7%8B%AC%E5%8D%A0%E6%97%B6%E9%97%B4/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/05/11/Spring-Boot%E6%8B%A6%E6%88%AA%E5%99%A8%E4%B8%AD%E8%8E%B7%E5%8F%96-POST-%E8%AF%B7%E6%B1%82%E4%BC%A0%E9%80%92%E7%9A%84%E5%8F%82%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          leetcode---636.函数的独占时间
+          Spring Boot拦截器中获取 POST 请求传递的参数
         
       </div>
     </a>
   
   
-    <a href="/2020/05/04/leetcode-456-132%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">leetcode---456.132模式</div>
+    <a href="/2020/05/06/leetcode-636-%E5%87%BD%E6%95%B0%E7%9A%84%E7%8B%AC%E5%8D%A0%E6%97%B6%E9%97%B4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode---636.函数的独占时间</div>
       <i class="icon-circle-right"></i>
     </a>
   

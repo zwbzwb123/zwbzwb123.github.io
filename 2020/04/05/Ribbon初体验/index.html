@@ -15,17 +15,15 @@
 <meta property="og:site_name" content="ZWBLOG">
 <meta property="og:description" content="主要简述 Ribbon Client 通过 RestTemplate 消费服务提供者。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://q89emimpd.bkt.clouddn.com/PX2595L0ZSB%7BWN_7RUC9FT2.png">
-<meta property="og:image" content="http://q89emimpd.bkt.clouddn.com/~%403A_O9IY%7B%28UHTV_%7B4%5D2A%60N.png">
-<meta property="og:image" content="http://q89emimpd.bkt.clouddn.com/P4%7BTWLJXA9%7DI~%40JQ7RD%5BKBX.png">
-<meta property="og:image" content="http://q89emimpd.bkt.clouddn.com/result.png">
-<meta property="og:image" content="http://q89emimpd.bkt.clouddn.com/eureka.png">
+<meta property="og:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/ribbon.png">
+<meta property="og:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/ribbon%20load.png">
+<meta property="og:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/ribbon%20eureka.png">
 <meta property="article:published_time" content="2020-04-05T04:45:10.000Z">
-<meta property="article:modified_time" content="2020-04-05T08:30:25.207Z">
+<meta property="article:modified_time" content="2020-05-23T07:20:50.115Z">
 <meta property="article:author" content="ZWB">
 <meta property="article:tag" content="Spring Cloud">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://q89emimpd.bkt.clouddn.com/PX2595L0ZSB%7BWN_7RUC9FT2.png">
+<meta name="twitter:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/ribbon.png">
   
     <link rel="alternative" href="/atom.xml" title="ZWBLOG" type="application/atom+xml">
   
@@ -191,7 +189,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="comment">// 省略 setter and getter</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>通过postman测试接口，结果如下</p>
-<p><img src="http://q89emimpd.bkt.clouddn.com/PX2595L0ZSB%7BWN_7RUC9FT2.png" alt="接口测试"></p>
+<p><img src="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/ribbon.png" alt="接口测试"></p>
 <p>至此，服务提供者准备完毕。</p>
 <hr>
 <p><strong>准备Ribbon Client</strong></p>
@@ -205,9 +203,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RibbonController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;service-provider.name&#125;"</span>)</span><br><span class="line">    String serviceName;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/greeting"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">greeting</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Person person = <span class="keyword">new</span> Person(<span class="number">1L</span>,<span class="string">"zwb"</span>);</span><br><span class="line">        <span class="keyword">return</span> restTemplate.postForObject(<span class="string">"http://"</span>+serviceName+<span class="string">"/hello"</span>,person,String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>这里的serviceName就是 hello-service-provider，如果直接填写服务提供者的ip和port，那么就不应该写上注解@loadBalanced。这个注解会提供一个LoadBalancerInterceptor，在发送请求之前，会对serviceName进行转换。可能会觉得有一些麻烦，那是因为Eureka还没上 ：）。</strong></p>
-<p><img src="http://q89emimpd.bkt.clouddn.com/~%403A_O9IY%7B%28UHTV_%7B4%5D2A%60N.png" alt=""></p>
-<p><img src="http://q89emimpd.bkt.clouddn.com/P4%7BTWLJXA9%7DI~%40JQ7RD%5BKBX.png" alt=""></p>
-<p><img src="http://q89emimpd.bkt.clouddn.com/result.png" alt="a"></p>
+<p><img src="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/ribbon%20load.png" alt=""></p>
 <p>这里可以看到服务提供者的ip和端口都已经解析出来了。</p>
 <p>测试接口，访问<a href="http://localhost:8080/greeting是可以正确得到数据的。" target="_blank" rel="noopener">http://localhost:8080/greeting是可以正确得到数据的。</a></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello Person&#123;id=1, name='zwb'&#125;</span><br></pre></td></tr></table></figure>
@@ -217,7 +213,7 @@
 <p>刚才的代码中 Ribbon 通过 RestTemplate 与服务提供者进行直接交互，这其实是不好的，而且也显得比较死。如果是通过服务发现的方式来调用服务提供者，会更加具有动态性，Ribbon Client 只需要与服务注册中心进行交互即可，不需要知道目标具体的ip。</p>
 <p><strong>启动 Eureka Server 端口为8081</strong></p>
 <p>访问 <a href="http://localhost:8081" target="_blank" rel="noopener">http://localhost:8081</a></p>
-<p><img src="http://q89emimpd.bkt.clouddn.com/eureka.png" alt=""></p>
+<p><img src="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/ribbon%20eureka.png" alt=""></p>
 <p>启动成功，但目前没有实例注册进来</p>
 <hr>
 <p>为刚才的两个应用添加 Eureka Client 依赖</p>
@@ -449,7 +445,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -457,7 +453,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color5">消息队列</a>
               </li>
              
               <li class="article-tag-list-item">
