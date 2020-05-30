@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>RabbitMQ 初体验 | ZWBLOG</title>
+  <title>leetcode---字符串的排列 | ZWBLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="RabbitMQ是实现了高级消息队列协议（AMQP）的开源消息代理软件（亦称面向消息的中间件） 下载地址： Erlang：http:&#x2F;&#x2F;www.erlang.org&#x2F;download.htmlRabbitMQ ：http:&#x2F;&#x2F;www.rabbitmq.com&#x2F;download.html">
+  <meta name="description" content="输入一个字符串，打印出该字符串中字符的所有排列。 你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RabbitMQ 初体验">
-<meta property="og:url" content="http://yoursite.com/2020/04/14/RabbitMQ%E5%88%9D%E4%BD%93%E9%AA%8C/index.html">
+<meta property="og:title" content="leetcode---字符串的排列">
+<meta property="og:url" content="http://yoursite.com/2020/05/23/leetcode-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/index.html">
 <meta property="og:site_name" content="ZWBLOG">
-<meta property="og:description" content="RabbitMQ是实现了高级消息队列协议（AMQP）的开源消息代理软件（亦称面向消息的中间件） 下载地址： Erlang：http:&#x2F;&#x2F;www.erlang.org&#x2F;download.htmlRabbitMQ ：http:&#x2F;&#x2F;www.rabbitmq.com&#x2F;download.html">
+<meta property="og:description" content="输入一个字符串，打印出该字符串中字符的所有排列。 你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/rabbitmqconfig.png">
-<meta property="og:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/rabbitmqadmin.png">
-<meta property="article:published_time" content="2020-04-14T08:14:22.000Z">
-<meta property="article:modified_time" content="2020-05-23T07:15:34.981Z">
+<meta property="article:published_time" content="2020-05-23T09:57:54.000Z">
+<meta property="article:modified_time" content="2020-05-23T10:44:49.580Z">
 <meta property="article:author" content="ZWB">
-<meta property="article:tag" content="消息队列">
+<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/rabbitmqconfig.png">
   
     <link rel="alternative" href="/atom.xml" title="ZWBLOG" type="application/atom+xml">
   
@@ -154,112 +151,44 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-RabbitMQ初体验" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-leetcode-字符串的排列" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      RabbitMQ 初体验
+      leetcode---字符串的排列
     </h1>
   
 
         
-        <a href="/2020/04/14/RabbitMQ%E5%88%9D%E4%BD%93%E9%AA%8C/" class="archive-article-date">
-  	<time datetime="2020-04-14T08:14:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-14</time>
+        <a href="/2020/05/23/leetcode-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/" class="archive-article-date">
+  	<time datetime="2020-05-23T09:57:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>RabbitMQ是实现了高级消息队列协议（AMQP）的开源消息代理软件（亦称面向消息的中间件）</p>
-<p>下载地址：</p>
-<p>Erlang：<a href="http://www.erlang.org/download.html" target="_blank" rel="noopener">http://www.erlang.org/download.html</a><br>RabbitMQ ：<a href="http://www.rabbitmq.com/download.html" target="_blank" rel="noopener">http://www.rabbitmq.com/download.html</a></p>
+        <p>输入一个字符串，打印出该字符串中字符的所有排列。</p>
+<p>你可以以任意顺序返回这个字符串数组，但里面不能有重复元素。</p>
 <a id="more"></a>
 
-<p>解压完毕后，配置环境变量</p>
-<p><img src="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/rabbitmqconfig.png" alt=""></p>
-<p>进入 RabbitMQ 的 sbin 目录，双击 rabbitmq-server.bat 或者 在命令行输入 rabbitmq-server 即可启动</p>
-<p>访问 <a href="http://localhost:15672" target="_blank" rel="noopener">http://localhost:15672</a> 输入默认的用户名密码 guest 即可进入 RabbitMQ 管理页面</p>
-<p><img src="https://zwbblog.oss-cn-hangzhou.aliyuncs.com/a/rabbitmqadmin.png" alt=""></p>
-<p>guest 用户只能通过本地网络访问，远程网络访问受限，所以需要添加另外一个用户，并设置相应权限</p>
-<hr>
-<p><strong>添加新用户 用户名root 密码root</strong></p>
-<p><em>rabbitmqctl add_user root root</em></p>
-<p><strong>为用户设置所有权限</strong></p>
-<p>rabbitmqctl set_permission -p / root “.*“ “.*“ “.*“ </p>
-<p><strong>设置用户为管理员</strong></p>
-<p><em>rabbitmqctl set_user_tags root administrator</em></p>
-<h4 id="Maven-依赖"><a href="#Maven-依赖" class="headerlink" title="Maven 依赖"></a>Maven 依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.rabbitmq<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>amqp-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.4.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>示例</p>
+<p>输入：s = “abc”<br>输出：[“abc”,”acb”,”bac”,”bca”,”cab”,”cba”]</p>
+<p>限制：</p>
+<p>1 &lt;= s 的长度 &lt;= 8</p>
+<p>这题考的就是回溯算法。</p>
+<p>但是超时了，但是在IDE上运行结果是正确的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String[] permutation(String s) &#123;</span><br><span class="line">    <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">    List&lt;String&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    findAllPattern(chars,res,<span class="number">0</span>,<span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line">    <span class="keyword">return</span> res.toArray(<span class="keyword">new</span> String[res.size()]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">findAllPattern</span><span class="params">(<span class="keyword">char</span>[] chars, List&lt;String&gt; res, <span class="keyword">int</span> count,List&lt;Integer&gt; index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (count == chars.length )&#123;</span><br><span class="line">        String p = sb.toString();</span><br><span class="line">        <span class="keyword">if</span> (!res.contains(p))</span><br><span class="line">            res.add(p);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;chars.length;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span> (index.contains(i))</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        List&lt;Integer&gt; list  =<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(i);</span><br><span class="line">        <span class="keyword">for</span> (Integer is:index)&#123;</span><br><span class="line">            list.add(is);</span><br><span class="line">        &#125;</span><br><span class="line">        sb.append(chars[i]);</span><br><span class="line">        findAllPattern(chars,res,count+<span class="number">1</span>,list);</span><br><span class="line">        sb.deleteCharAt(count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h4><p><code>MessageProvider.java</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageProvider</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> String EXCHANGE_NAME= <span class="string">"demo_exchange"</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> String QUEUE_NAME= <span class="string">"demo_queue"</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> String ROUTING_KEY= <span class="string">"routingKey"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, TimeoutException </span>&#123;</span><br><span class="line">        ConnectionFactory factory =<span class="keyword">new</span> ConnectionFactory();</span><br><span class="line">        factory.setHost(<span class="string">"localhost"</span>);</span><br><span class="line">        factory.setPort(<span class="number">5672</span>);</span><br><span class="line">        factory.setUsername(<span class="string">"root"</span>);</span><br><span class="line">        factory.setPassword(<span class="string">"root"</span>);</span><br><span class="line">        Connection connection = factory.newConnection();</span><br><span class="line">        Channel channel = connection.createChannel();</span><br><span class="line">        channel.exchangeDeclare(EXCHANGE_NAME,<span class="string">"direct"</span>,<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">null</span>);</span><br><span class="line">        channel.queueDeclare(QUEUE_NAME,<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">false</span>,<span class="keyword">null</span>);</span><br><span class="line">        channel.queueBind(QUEUE_NAME,EXCHANGE_NAME,ROUTING_KEY);</span><br><span class="line">        String message = <span class="string">"hello world"</span>;</span><br><span class="line">   		channel.basicPublish(EXCHANGE_NAME,ROUTING_KEY,<span class="keyword">true</span>, <span class="keyword">new</span> AMQP.BasicProperties().builder().build(),message.getBytes());</span><br><span class="line">        <span class="comment">//channel.close();</span></span><br><span class="line">        <span class="comment">//connection.close(); 如果此处不关闭的话，就会一直消费消息，如果关闭过快的话，就会还没消费消息就关闭连接了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>官方精选题解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; res = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">char</span>[] c;</span><br><span class="line">    <span class="keyword">public</span> String[] permutation(String s) &#123;</span><br><span class="line">        c = s.toCharArray();</span><br><span class="line">        dfs(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res.toArray(<span class="keyword">new</span> String[res.size()]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x == c.length - <span class="number">1</span>) &#123;</span><br><span class="line">            res.add(String.valueOf(c)); <span class="comment">// 添加排列方案</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        HashSet&lt;Character&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = x; i &lt; c.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(set.contains(c[i])) <span class="keyword">continue</span>; <span class="comment">// 重复，因此剪枝</span></span><br><span class="line">            set.add(c[i]);</span><br><span class="line">            swap(i, x); <span class="comment">// 交换，将 c[i] 固定在第 x 位 </span></span><br><span class="line">            dfs(x + <span class="number">1</span>); <span class="comment">// 开启固定第 x + 1 位字符</span></span><br><span class="line">            swap(i, x); <span class="comment">// 恢复交换</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> tmp = c[a];</span><br><span class="line">        c[a] = c[b];</span><br><span class="line">        c[b] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：jyd</span><br><span class="line">链接：https:<span class="comment">//leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/solution/mian-shi-ti-38-zi-fu-chuan-de-pai-lie-hui-su-fa-by/</span></span><br></pre></td></tr></table></figure>
 
-<p><code>MessageConsumer.java</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageConsumer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">static</span> String QUEUE_NAME= <span class="string">"demo_queue"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ConnectionFactory factory =<span class="keyword">new</span> ConnectionFactory();</span><br><span class="line">        factory.setHost(<span class="string">"localhost"</span>);</span><br><span class="line">        factory.setPort(<span class="number">5672</span>);</span><br><span class="line">        factory.setPassword(<span class="string">"root"</span>);</span><br><span class="line">        factory.setUsername(<span class="string">"root"</span>);</span><br><span class="line"></span><br><span class="line">        Connection connection = factory.newConnection();</span><br><span class="line">        Channel channel = connection.createChannel();</span><br><span class="line">        channel.basicQos(<span class="number">64</span>);</span><br><span class="line">        Consumer consumer = <span class="keyword">new</span> DefaultConsumer(channel)&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleDelivery</span><span class="params">(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, <span class="keyword">byte</span>[] body)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"receive :"</span>+<span class="keyword">new</span> String(body));</span><br><span class="line">                channel.basicAck(envelope.getDeliveryTag(),<span class="keyword">false</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;;</span><br><span class="line">        channel.basicConsume(QUEUE_NAME,consumer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样就简单实现了消息的生产和消费</p>
-<p>在RabbitMQ中，生产者并不会将消息直接投递到队列当中，而是投递到交换机（exchange）当中，并为这个消息指定一个路由键，交换机会根据这个路由键将消息路由到对应的一个或多个队列中，然后消费者消费队列中的消息。如果路由不到，会选择丢弃或是返回给生产者。</p>
-<p>交换机是如何根据消息的路由键将消息路由到队列？</p>
-<p>回顾上面的代码</p>
-<p>声明交换机的时候，指定了交换机的类型为 direct ，绑定队列时，常量ROUTING_KEY则作为绑定键。</p>
-<p><code>channel.exchangeDeclare(EXCHANGE_NAME,&quot;direct&quot;,true,false,null);</code></p>
-<p><code>channel.queueBind(QUEUE_NAME,EXCHANGE_NAME,ROUTING_KEY);</code></p>
-<p>direct 就是交换机的一种类型，这种类型的交换机会把消息路由到 路由键和绑定键 完全匹配的队列上</p>
-<h4 id="交换机类型"><a href="#交换机类型" class="headerlink" title="交换机类型"></a>交换机类型</h4><p>相应的交换机类型还有:</p>
-<p>fanout：这种类型的交换机不关注路由键，会把消息路由到所有与他绑定的队列上</p>
-<p>topic：这种类型的交换机 消息的路由键以 ”.“ 分割，绑定键可以用 “.” 、”#”进行模糊匹配，”.” 用于匹配一个单词，”#”用于匹配 0 或多个</p>
-<p>例如  路由键：com.abc.www  可以路由到绑定键为 com.*.* 的队列上 也可以路由到 com.#</p>
-<p>还有一种类型为 header，并不常用，而且性能较差。</p>
-<h4 id="mandatory参数"><a href="#mandatory参数" class="headerlink" title="mandatory参数"></a>mandatory参数</h4><p>当发送消息时，有一个 mandatory 参数，当这个参数为 true 时，如果交换机找不到对应的队列，就会将消息返回给生产者，如果是false，消息则会被丢弃。</p>
-<p><code>channel.basicPublish(EXCHANGE_NAME,ROUTING_KEY,true, new AMQP.BasicProperties().builder().build(),message.getBytes());</code></p>
-<p>生产者可以通过 channel#addReturnListener 传入ReturnListener类型的对象，该对象重写 handleReturn方法监听返回的消息。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">channel.addReturnListener(<span class="keyword">new</span> ReturnListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleReturn</span><span class="params">(<span class="keyword">int</span> replyCode, String replyText, String exchange, String routingKey, AMQP.BasicProperties properties, <span class="keyword">byte</span>[] body)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"return message:"</span>+<span class="keyword">new</span> String(body));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="备份交换机"><a href="#备份交换机" class="headerlink" title="备份交换机"></a>备份交换机</h4><p>如果消息未设置 mandatory 参数，那么消息就会丢失，而绑定了备份交换机之后，未被的路由的消息就会存储在备份交换机中。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,Object&gt; properties = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"> properties.put(<span class="string">"alternate-exchange"</span>,<span class="string">"ae"</span>);</span><br><span class="line"> channel.exchangeDeclare(EXCHANGE_NAME,<span class="string">"direct"</span>,<span class="keyword">true</span>,<span class="keyword">false</span>,properties );</span><br><span class="line"> channel.exchangeDeclare(<span class="string">"ae"</span>,<span class="string">"fanout"</span>,<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line"> channel.queueDeclare(QUEUE_NAME,<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">false</span>,<span class="keyword">null</span>);</span><br><span class="line"> channel.queueDeclare(<span class="string">"ae-queue"</span>,<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">false</span>,<span class="keyword">null</span>);</span><br><span class="line"> </span><br><span class="line"> channel.queueBind(QUEUE_NAME,EXCHANGE_NAME,ROUTING_KEY);</span><br><span class="line"> channel.queueBind(<span class="string">"ae-queue"</span>,<span class="string">"ae"</span>,ROUTING_KEY);</span><br></pre></td></tr></table></figure>
-
-<p>可以在声明交换机的时候为其指定备份交换机，当消息不能正确的路由到队列时，就会发送到备份交换机中，进而发送到备份交互机绑定的队列上</p>
-<h4 id="过期时间-TTL"><a href="#过期时间-TTL" class="headerlink" title="过期时间 TTL"></a>过期时间 TTL</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String,Object&gt; properties = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">properties.put(<span class="string">"x-message-ttl"</span>,<span class="number">100</span>);</span><br><span class="line">channel.queueDeclare(QUEUE_NAME,<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">false</span>,properties);</span><br></pre></td></tr></table></figure>
-
-<p>在声明队列的时候，为队列添加 <code>x-message-ttl</code>属性，并为其指定时间(单位：毫秒)，即可设置消息的过期时间，如果消息在队列中存活时间超过设置的值，就会变成死信。如果不设置 ttl，则表示这个消息不会过期。<strong>这个设置作用范围是整个队列的。</strong></p>
-<p><strong>为单独的消息设置过期时间：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">channel.basicPublish(EXCHANGE_NAME,ROUTING_KEY,<span class="keyword">true</span>,</span><br><span class="line">            <span class="keyword">new</span> AMQP.BasicProperties()</span><br><span class="line">                    .builder()</span><br><span class="line">                    .expiration(<span class="string">"100"</span>)</span><br><span class="line">                    .build(),message.getBytes());</span><br></pre></td></tr></table></figure>
-
-<p>在发送消息时，设置 expiration属性</p>
-<h4 id="死信队列（死信交换机）"><a href="#死信队列（死信交换机）" class="headerlink" title="死信队列（死信交换机）"></a>死信队列（死信交换机）</h4><p>消息变为死信的情况：</p>
-<ul>
-<li>消息被拒绝，requeue设置为false</li>
-<li>消息过期</li>
-<li>队列达到最大长度</li>
-</ul>
-<p>当消息在一个队列变成死信，它能够被发往死信交换机（DLX Dead-Letter-Exchange），此交换机与队列进行绑定。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">channel.exchangeDeclare(<span class="string">"dlx"</span>,<span class="string">"fanout"</span>);</span><br><span class="line">Map&lt;String,Object&gt; properties = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">properties.put(<span class="string">"x-dead-letter-exchange"</span>,<span class="string">"dlx"</span>);</span><br><span class="line">channel.queueDeclare(<span class="string">"demo_queue"</span>,<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">false</span>,properties);</span><br><span class="line">channel.queueDeclare(<span class="string">"dlx_queue"</span>,<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">false</span>,<span class="keyword">null</span>);</span><br><span class="line">channel.queueBind(<span class="string">"dlx_queue"</span>,<span class="string">"dlx"</span>,<span class="string">"routingKey"</span>);</span><br></pre></td></tr></table></figure>
-
-<p>为队列设置 <code>x-dead-letter-exchange</code>属性并指明 DLX 即可，当这个队列中的消息成为死信，就会被发往 dlx，并路由到 dlx_queue 中。</p>
-<p>也可以为 dlx 指定路由键，如果不指定，则用原队列的路由键</p>
-<p><code>x-dead-letter-routing-key</code></p>
-<h4 id="发送方确认机制"><a href="#发送方确认机制" class="headerlink" title="发送方确认机制"></a>发送方确认机制</h4><p>生产者如何知道消息真正地到达了 RabbitMQ？可以通过异步发送方确认机制。提供一个回调方法，服务端处理完消息后就会进行回调。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SortedSet&lt;Long&gt; tags = <span class="keyword">new</span> TreeSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">channel.addConfirmListener(<span class="keyword">new</span> ConfirmListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleAck</span><span class="params">(<span class="keyword">long</span> deliveryTag, <span class="keyword">boolean</span> multiple)</span> <span class="keyword">throws</span> IOException      		 </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (multiple)&#123;</span><br><span class="line">            tags.headSet(deliveryTag+<span class="number">1</span>).clear();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            tags.remove(deliveryTag);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleNack</span><span class="params">(<span class="keyword">long</span> deliveryTag, <span class="keyword">boolean</span> multiple)</span> <span class="keyword">throws</span> IOException 			  </span>&#123;</span><br><span class="line">        <span class="comment">//失败重发</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">channel.basicPublish(<span class="string">"demo_exchange"</span>,<span class="string">"routingKey"</span>,<span class="keyword">null</span>,<span class="string">"hello"</span>.getBytes());</span><br><span class="line">tags.add(channel.getNextPublishSeqNo());</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="SpringBoot-集成-RabbitMQ"><a href="#SpringBoot-集成-RabbitMQ" class="headerlink" title="SpringBoot 集成 RabbitMQ"></a>SpringBoot 集成 RabbitMQ</h4><h5 id="Maven-依赖-1"><a href="#Maven-依赖-1" class="headerlink" title="Maven 依赖"></a>Maven 依赖</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring.rabbitmq.host&#x3D;localhost</span><br><span class="line">spring.rabbitmq.port&#x3D;5672</span><br><span class="line">spring.rabbitmq.username&#x3D;root</span><br><span class="line">spring.rabbitmq.password&#x3D;root</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageSender</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RabbitTemplate template;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMsg</span><span class="params">(String msg)</span></span>&#123;</span><br><span class="line">        template.send(<span class="string">"demo_exchange"</span>,<span class="string">"routingKey"</span>,<span class="keyword">new</span> Message(msg.getBytes(),<span class="keyword">new</span> MessageProperties()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="接收消息"><a href="#接收消息" class="headerlink" title="接收消息"></a>接收消息</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageReceiver</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RabbitListener</span>(queues=<span class="string">"demo_queue"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receive</span><span class="params">(String content)</span></span>&#123;</span><br><span class="line">        System.out.println(content);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>这道题的关键应该就在于如何在递归的时候不会取到重复的元素，题解非常巧妙。</p>
 
       
 
@@ -273,7 +202,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">消息队列</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">leetcode</a>
         		</li>
       		
 		</ul>
@@ -329,7 +258,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/14/RabbitMQ%E5%88%9D%E4%BD%93%E9%AA%8C/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/05/23/leetcode-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -343,18 +272,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/15/leetcode-20-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/05/25/leetcode-%E7%A4%BC%E7%89%A9%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BB%B7%E5%80%BC/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          leetcode---20.有效的括号
+          leetcode---礼物的最大价值
         
       </div>
     </a>
   
   
-    <a href="/2020/04/13/Nacos%E4%BD%9C%E4%B8%BA%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Nacos作为配置中心</div>
+    <a href="/2020/05/22/%E5%85%B3%E4%BA%8E%E6%95%A3%E5%88%97%E8%A1%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于散列表</div>
       <i class="icon-circle-right"></i>
     </a>
   
